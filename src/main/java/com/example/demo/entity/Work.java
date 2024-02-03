@@ -2,6 +2,9 @@ package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 
@@ -17,7 +20,11 @@ public class Work {
     @Column(nullable = true)
     private Integer lines;
     @Column(nullable = false)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime start;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @Column(nullable = false)
     private LocalDateTime stop;
     @JsonBackReference
